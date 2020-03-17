@@ -1,5 +1,5 @@
 // ⭐️ Example Challenge START ⭐️
- 
+
 /**
  * ### Challenge `processFirstItem`
  * 
@@ -48,9 +48,12 @@ function processFirstItem(stringList, callback) {
  * [2] Invoking `processLength` passing `[]` and `(num) => "There are " + num`,
  * should return "There are 0".
 */
-function processLength(/* CODE HERE */) {
+function processLength(list, callback) {
   /* CODE HERE */
+  return callback(list.length);
 }
+  processLength(['foo', 'bar'], (num) => num + 1000);
+  processLength([], (num) => "There are " + num);
 
 /**
  * ### Challenge `processLastItem`
@@ -66,9 +69,13 @@ function processLength(/* CODE HERE */) {
  * Invoking `processLastItem` passing `['foo', 'bar']` and `(str) => str + str`,
  * should return 'barbar'.
 */
-function processLastItem(/* CODE HERE */) {
+function processLastItem(stringList, callback) {
   /* CODE HERE */
+  let lastStringIndex = stringList.length -1; 
+  let lastString = stringList[lastStringIndex];
+  return callback(lastString);
 }
+processLastItem(['foo', 'bar'], (str) => str + str);
 
 /**
  * ### Challenge `processSum`
@@ -88,10 +95,13 @@ function processLastItem(/* CODE HERE */) {
  * [2] Invoking `processSum` passing `-5`, '-1', and `(num) => num + 1000`,
  * should return 994.
 */
-function processSum(/* CODE HERE */) {
+function processSum(num1, num2, callback) {
   /* CODE HERE */
-}
+  return callback(num1 + num2);
 
+}
+// processSum(10, 30, (num) => num + " is a big number!");
+   processSum(-5, -1, (num) => num + 1000);
 /**
  * ### Challenge `processProduct`
  * 
@@ -110,9 +120,12 @@ function processSum(/* CODE HERE */) {
  * [2] Invoking `processProduct` passing 25 and 0 and `(num) => num + 1000`,
  * should return 1000.
 */
-function processProduct(/* CODE HERE */) {
+function processProduct(num1, num2, callback) {
   /* CODE HERE */
+  return callback(num1 * num2);
 }
+// processSum(2, 7, (num) => num + " is a big number!");
+  processProduct(25, 0, (num) => num + 1000);
 
 /**
  * ### Challenge `processDuplicateFree`
@@ -155,10 +168,20 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * 
  * [2] Invoking `lowerCaseStrings` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
 */
-function lowerCaseStrings(/* code here */) {
-  /* code here */
-}
 
+function lowerCaseStrings(strings) {
+  let lowerCaseString = [];
+  strings.forEach(str => lowerCaseString.push(str.toLowerCase()));
+  return lowerCaseString;
+};
+lowerCaseStrings([ 'Orange', 'APPLE', 'banana', 'mAnGo']);
+
+/*
+function lowerCaseStrings2(strings) {
+  return strings.map(str => str.toLowerCase());
+};
+lowerCaseStrings2([ 'Orange', 'APPLE', 'banana', 'mAnGo']);
+*/
 /**
  * ### Challenge `isItAnApple`
  * 
@@ -166,17 +189,42 @@ function lowerCaseStrings(/* code here */) {
  * Implement this function using map().
  * 
  * @param strings an array of strings.
- * @returns an array of equal length to `strings` containing `true` if the corresponding entry in the `strings` is 'apple' and `false` if it is anything else.
- * 
+ * @returns an array of equal length to `strings` containing true` if the corresponding entry in the `strings` is 'apple' and `false` if it is anything else.
+ * `
  * 
  * Examples of usage of this function:
  * [1] Invoking `isItAnApple` with `[ 'orange', 'apple', 'banana', 'apples', 'apple', 'mango' ]` will return `[ false, true, false, false, true, false ]`.
  * 
  * [2] Invoking `isItAnApple` with `['a', 'b', 'c' ]` will return `[ false, false, false ]`.
 */
-function isItAnApple(/* code here */) {
-  /* code here */
-}
+
+/* for each
+function isItAnApple(strings) {
+  /* code here 
+  let array = [];
+  strings.forEach(str => {
+    if (str != 'apple'){
+      array.push('false');
+    } else { array.push('true')};
+  });
+  return array;
+};
+isItAnApple([ 'orange', 'apple', 'banana', 'apples', 'apple', 'mango' ]);
+*/
+//Map
+function isItAnApple(strings) {
+  let newArray = [];
+  return strings.map(str => {
+    if (str == 'apple') {
+      return true;
+    } else {
+      return false;
+    };
+    return newArray;
+  })
+};
+isItAnApple([ 'orange', 'apple', 'banana', 'apples', 'apple', 'mango' ]);
+
 
 /**
  * ### Challenge `removeApple`
@@ -194,9 +242,12 @@ function isItAnApple(/* code here */) {
  * 
  * [2] Invoking `removeApple` with `['a', 'b', 'c' ]` will return `[ 'a', 'b', 'c' ]`.
 */
-function removeApple(/* code here */) {
+function removeApple(strings) {
   /* code here */
-}
+  let filteredArray = strings.filter(str => str !== 'apple')
+  return filteredArray;
+};
+removeApple([ 'orange', 'apple', 'banana', 'apples', 'apple', 'mango' ]);
 
 /**
  * ### Challenge `stringSmash`
@@ -213,9 +264,14 @@ function removeApple(/* code here */) {
  * 
  * [2] Invoking `stringSmash` with `['a', 'b', 'c' ]` will return `abc`.
 */
-function stringSmash(/* code here */) {
+
+
+function stringSmash(strings) {
   /* code here */
-}
+  return strings.reduce((accumulator, str) => accumulator + str);
+};
+stringSmash([ 'orange', 'apple', 'banana', 'apples', 'apple', 'mango' ]);
+
 
 // A local community center is holding a fund raising 5k fun run and has invited
 // 50 small businesses to make a small donation on their behalf for some much needed
@@ -232,9 +288,14 @@ function stringSmash(/* code here */) {
  * @returns an array with all the runners' full names in the following format: "Smith, John".
  * The full names appear in the array in the same order the runners appear in the `runners` array.
 */
-function getFullNames(/* CODE HERE */) {
+
+function getFullNames(runners) {
   /* CODE HERE */
-}
+  let fullNames = [];
+  runners.forEach(runner => fullNames.push(`${runner.last_name}, ${runner.first_name}`));
+  return fullNames;
+};
+getFullNames(runners);
 
 /**
  * ### Challenge `firstNamesAllCaps`
@@ -248,10 +309,11 @@ function getFullNames(/* CODE HERE */) {
  * @returns an array with all the runners' first names in ALL CAPS.
  * The first names appear in the array in the same order the runners appear in the `runners` array.
 */
-function firstNamesAllCaps(/* CODE HERE */) {
+function firstNamesAllCaps(runners) {
   /* CODE HERE */
+  return runners.map(runner => runner.first_name.toUpperCase());
 }
-
+firstNamesAllCaps(runners);
 /**
  * ### Challenge `getRunnersByTShirtSize`
  * * THIS IS A STRETCH PROBLEM! ATTEMPT ONLY AFTER COMPLETING ALL NON-STRETCH CHALLENGES!
@@ -266,9 +328,11 @@ function firstNamesAllCaps(/* CODE HERE */) {
  * @returns an array containing only the runners that use the given `tShirtSize`.
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
-function getRunnersByTShirtSize(/* CODE HERE */) {
+function getRunnersByTShirtSize(runners, tShirtSize) {
   /* CODE HERE */
-}
+  return runners.filter(runner => runner.shirt_size == tShirtSize);
+};
+getRunnersByTShirtSize(runners, 'M');
 
 /**
  * ### Challenge `tallyUpDonations`
@@ -295,22 +359,26 @@ function tallyUpDonations(/* CODE HERE */) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
- * 
+ * - The difference between counter 1 and counter 2 is that counter1 changes the count locally and counter2 changes the count globally.
  * 2. Which of the two uses a closure? How can you tell?
- * 
+ * - Counter1 code uses a closure because the variable, return statement, and method is nested inside the function. Meaning functions are bundled together.
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ * -  counter1 would be preferable if you would want to re-use the function and create multiple counters. Counter2 would be best used where you only need to create one counter.
 */
 
 // counter1 code
 function counterMaker() {
   let count = 0;
   return function counter() {
-    count++;
+    // return was missing //
+    return count++;
   }
 }
 
 const counter1 = counterMaker();
+counter1();
+const a = counterMaker();
+const b = counterMaker();
 
 // counter2 code
 let count = 0;
@@ -318,6 +386,7 @@ let count = 0;
 function counter2() {
   return count++;
 }
+counter2();
 
 /**
  * ### Challenge `counterMakerWithLimit`
